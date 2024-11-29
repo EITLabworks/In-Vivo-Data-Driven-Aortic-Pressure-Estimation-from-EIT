@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: >-
+  In Vivo Data-Driven Aortic Pressure Estimation from Electrical Impedance Tomography
+message: >-
+  If you use this repository, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jacob
+    family-names: Thönes
+    email: jacob.thoenes@uni-rostock.de
+    affiliation: Universität Rostock
+    orcid: 'https://orcid.org/0000-0003-2826-5281'
+repository-code: 'https://github.com/EITLabworks/In-Vivo-Data-Driven-Aortic-Pressure-Estimation-from-EIT'
+url: 'https://github.com/EITLabworks/In-Vivo-Data-Driven-Aortic-Pressure-Estimation-from-EIT'
+keywords:
+  -  Arterial Blood Pressure, 
+  -  Electrical Impedance Tomography
+  -  Machine Learning
+license: MIT
+version: 0.1.0
+date-released: '2025'
