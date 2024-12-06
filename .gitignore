@@ -1,5 +1,6 @@
 .ipynb_checkpoints
 __pycache__
+engineering.ipynb
 visualization.ipynb
 pool_loading.ipynb
 images/*.pdf
@@ -7,4 +8,6 @@ images/cv_stack/
 models/
 *.gif
 cross_*-P*.ipynb
-
+mapper_kerastuner-C*
+mapper_tuning
+archive/
