@@ -17,4 +17,3 @@ and diastolic arterial pressure (DAP) using electrical impedance tomography (EIT
 -->
 
 
-
