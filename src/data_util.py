@@ -121,6 +121,7 @@ def load_examples(X: list, y: list, pigs: list, path: str):
 
     print(f"Loading data from {path}")
     files = glob(join(path, "*.npz"), recursive=True)
+    files = np.sort(files)
     if len(files) == 0:
         raise Exception("No npz files found in directory")
 
@@ -250,7 +251,7 @@ def load_aug_sample(path):
 
 
 def load_augmented_example(
-    path: str, pigs: list, sample_skip: int = 0, load_samples: str = "upwards"
+    path: str, pigs: list, sample_skip: int = 0, load_samples: str = "upwards", shuffle=False
 ):
     """
     load_augmented_example
@@ -265,6 +266,8 @@ def load_augmented_example(
         limit for sample loading, by default 0
     load_samples : str, optional
         define the upper or lower limit, by default "upwards" | ["upwards", "downwards"]
+    shuffle : bool, optional, by default False
+        shuffle the data
 
     Returns
     -------
@@ -294,5 +297,15 @@ def load_augmented_example(
     y = np.array(y)
     clr_pig = np.array(clr_pig)
 
+    N = X.shape[0]
+    if shuffle:
+        shuffle = np.random.randint(N, size=N)
+    else:
+        shuffle = range(N)
+
+    X = X[shuffle, ...]
+    y = y[shuffle, ...]
+    clr_pig = clr_pig[shuffle, ...]
+    
     X = np.expand_dims(X, axis=3)
     return X, y, clr_pig
