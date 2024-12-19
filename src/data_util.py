@@ -280,14 +280,14 @@ def load_augmented_example(
     for pig in pigs:
         pig_files = glob(path + pig + "/*.npz")
         pig_files = np.sort(pig_files)
-        if sample_skip != 0:
-            if load_samples == "upwards":
-                pig_files = pig_files[sample_skip:]
-            elif load_samples == "downwards":
-                pig_files = pig_files[:sample_skip]
-            print(
-                f"Selected {len(pig_files)} from {pig_files[0]} to {pig_files[-1]} from pig {pig}."
-            )
+        # if sample_skip != 0:
+        if load_samples == "upwards":
+            pig_files = pig_files[sample_skip:]
+        elif load_samples == "downwards":
+            pig_files = pig_files[:sample_skip]
+        print(
+            f"Selected {len(pig_files)} from {pig_files[0]} to {pig_files[-1]} from pig {pig}."
+        )
         for file in pig_files:
             xs, ys, ps = load_aug_sample(file)
             X.append(xs)
@@ -299,9 +299,10 @@ def load_augmented_example(
 
     N = X.shape[0]
     if shuffle:
-        shuffle = np.random.randint(N, size=N)
+        shuffle = np.arange(N)
+        np.random.shuffle(shuffle)
     else:
-        shuffle = range(N)
+        shuffle = np.arange(N)
 
     X = X[shuffle, ...]
     y = y[shuffle, ...]
