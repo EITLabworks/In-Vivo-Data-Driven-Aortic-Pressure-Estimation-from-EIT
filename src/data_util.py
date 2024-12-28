@@ -251,7 +251,11 @@ def load_aug_sample(path):
 
 
 def load_augmented_example(
-    path: str, pigs: list, sample_skip: int = 0, load_samples: str = "upwards", shuffle=False
+    path: str,
+    pigs: list,
+    sample_skip: int = 0,
+    load_samples: str = "upwards",
+    shuffle=False,
 ):
     """
     load_augmented_example
@@ -307,6 +311,6 @@ def load_augmented_example(
     X = X[shuffle, ...]
     y = y[shuffle, ...]
     clr_pig = clr_pig[shuffle, ...]
-    
+
     X = np.expand_dims(X, axis=3)
     return X, y, clr_pig

@@ -15,3 +15,5 @@ src/results/*_2*
 src/results/*_3*
 src/results/*_4*
 src/results/*_5*
+src/weights_v5
+mapper_kerastuner-v5_10_50db.ipynb
