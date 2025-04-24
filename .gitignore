@@ -17,3 +17,5 @@ src/results/*_4*
 src/results/*_5*
 src/weights_v5
 mapper_kerastuner-v5_10_*db.ipynb
+block_transitions.json
+LOOCV*

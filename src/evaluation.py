@@ -6,6 +6,37 @@ import pandas as pd
 import seaborn as sns
 
 
+from scipy.signal import butter, filtfilt
+
+
+def lowpass_filter(data, cutoff=10, fs=1000, order=4):
+    nyquist = 0.5 * fs
+    normal_cutoff = cutoff / nyquist
+    b, a = butter(order, normal_cutoff, btype="low", analog=False)
+    filtered_data = filtfilt(b, a, data, axis=0)
+    return filtered_data
+
+
+def highlight_min(s):
+    is_min = s == s.min()
+    return ["background-color: lightcoral" if v else "" for v in is_min]
+
+
+def highlight_max(s):
+    is_min = s == s.max()
+    return ["background-color: lightcoral" if v else "" for v in is_min]
+
+
+def AP_stats(df, cat="DAP ±10"):
+    value = df[cat].dropna()
+    mean = value.mean()
+    std = value.std()
+    var = value.var()
+    print(f"{mean=}, {std=}, {var=}")
+
+
+""" dept"""
+
 # color maps
 C_MAP = {
     "python": {
