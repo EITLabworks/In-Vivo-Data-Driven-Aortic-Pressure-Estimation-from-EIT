@@ -9,9 +9,13 @@ models/
 *.gif
 cross_*-P*.ipynb
 mapper_kerastuner-C*
-mapper_tuning
+mapper_tuning*
 archive/
 src/results/*_2*
 src/results/*_3*
 src/results/*_4*
 src/results/*_5*
+src/weights_v5
+mapper_kerastuner-v5_10_*db.ipynb
+block_transitions.json
+LOOCV*
