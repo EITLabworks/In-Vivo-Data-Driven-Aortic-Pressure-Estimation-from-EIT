@@ -121,6 +121,7 @@ def load_examples(X: list, y: list, pigs: list, path: str):
 
     print(f"Loading data from {path}")
     files = glob(join(path, "*.npz"), recursive=True)
+    files = np.sort(files)
     if len(files) == 0:
         raise Exception("No npz files found in directory")
 
@@ -250,7 +251,11 @@ def load_aug_sample(path):
 
 
 def load_augmented_example(
-    path: str, pigs: list, sample_skip: int = 0, load_samples: str = "upwards"
+    path: str,
+    pigs: list,
+    sample_skip: int = 0,
+    load_samples: str = "upwards",
+    shuffle=False,
 ):
     """
     load_augmented_example
@@ -265,6 +270,8 @@ def load_augmented_example(
         limit for sample loading, by default 0
     load_samples : str, optional
         define the upper or lower limit, by default "upwards" | ["upwards", "downwards"]
+    shuffle : bool, optional, by default False
+        shuffle the data
 
     Returns
     -------
@@ -277,14 +284,14 @@ def load_augmented_example(
     for pig in pigs:
         pig_files = glob(path + pig + "/*.npz")
         pig_files = np.sort(pig_files)
-        if sample_skip != 0:
-            if load_samples == "upwards":
-                pig_files = pig_files[sample_skip:]
-            elif load_samples == "downwards":
-                pig_files = pig_files[:sample_skip]
-            print(
-                f"Selected {len(pig_files)} from {pig_files[0]} to {pig_files[-1]} from pig {pig}."
-            )
+        # if sample_skip != 0:
+        if load_samples == "upwards":
+            pig_files = pig_files[sample_skip:]
+        elif load_samples == "downwards":
+            pig_files = pig_files[:sample_skip]
+        print(
+            f"Selected {len(pig_files)} from {pig_files[0]} to {pig_files[-1]} from pig {pig}."
+        )
         for file in pig_files:
             xs, ys, ps = load_aug_sample(file)
             X.append(xs)
@@ -293,6 +300,17 @@ def load_augmented_example(
     X = np.array(X)
     y = np.array(y)
     clr_pig = np.array(clr_pig)
+
+    N = X.shape[0]
+    if shuffle:
+        shuffle = np.arange(N)
+        np.random.shuffle(shuffle)
+    else:
+        shuffle = np.arange(N)
+
+    X = X[shuffle, ...]
+    y = y[shuffle, ...]
+    clr_pig = clr_pig[shuffle, ...]
 
     X = np.expand_dims(X, axis=3)
     return X, y, clr_pig
